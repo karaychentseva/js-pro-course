@@ -1,1 +1,1 @@
-# Карайченцева Наталья Валентиновна
+# js-pro-course homeworks by Natalya Karaychentseva
