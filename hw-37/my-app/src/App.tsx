@@ -1,5 +1,6 @@
 import Description from "./components/description/Description";
 import MyButton from "./components/my-button/MyButton";
+import PostsWrap from "./components/posts-wrap/PostsWrap";
 import Title from "./components/title/Title";
 
 const App = () => {
@@ -14,6 +15,8 @@ const App = () => {
           <MyButton text="Main Button2" />
           <MyButton colorClass='blue' />
         </div>
+        
+        <PostsWrap />
       </div>
     )
 }
