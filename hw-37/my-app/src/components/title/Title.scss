@@ -12,6 +12,16 @@
         color: blue;
         font-family: 'Quicksand';
     }
+
+    &__icon {
+        width: 56px;
+        height: 56px;
+        display: inline-block;
+        path {
+            fill: rgb(81, 0, 97);
+
+        }
+    }
     
 }
 
