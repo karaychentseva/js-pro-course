@@ -1,4 +1,15 @@
 * {
+  --background-color: #f5f8ff;
+  --card-color: #ffffff;
+  
+  --primary-color0: #7500a3;
+  --primary-color1: #c100d3;
+  --primary-color2: #db81ff;
+  --header-color: #111111;
+  --text-color: #002b1a;
+}
+
+* {
   margin: 0;
   padding: 0;
   text-decoration: none;
