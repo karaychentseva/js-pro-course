@@ -3,6 +3,7 @@ import ClickButton from "./components/click-button/ClickButton";
 import Description from "./components/description/Description";
 import Header from "./components/header/Header";
 import MyButton from "./components/my-button/MyButton";
+import Post from "./components/post/Post";
 import PostsWrap from "./components/posts-wrap/PostsWrap";
 import Registration from "./components/registration/Registration";
 import Timer from "./components/timer/Timer";
@@ -29,11 +30,13 @@ const App = () => {
         </div>
          */}
         
-        <Registration />
+        {/* <Registration /> */}
 
         {/* <ClickButton /> */}
         {/* <Timer /> */}
         {/* <PostsWrap /> */}
+
+        <Post id={12} />
         </div>
       </div>
     )
