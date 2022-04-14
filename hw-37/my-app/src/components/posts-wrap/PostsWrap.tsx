@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { PostType } from "../../types/PostType";
-import Post from "../post/Post";
+import PostType from "../../types/PostType";
+import PostPreview from "../post-preview/PostPreview";
 import "./PostsWrap.scss";
 
 const URL = "https://studapi.teachmeskills.by/blog/posts/?limit=50&offset=0";
@@ -37,7 +37,7 @@ const PostsWrap: React.FC<PropsType> = () => {
             })
     }
 
-    const postComponents = posts.map(post => <Post key={post.id} data={post} />);
+    const postComponents = posts.map(post => <PostPreview key={post.id} data={post} />);
 
     return (
         <div className="posts-wrap">
