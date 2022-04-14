@@ -1,23 +1,22 @@
-import { useContext, useState } from "react";
-import LangContext from "../../contexts/LangContext";
+import useTranslate from "../../hooks/useTranslate";
 import "./LangToggle.scss";
 
 type PropsType = {
-    
+
 }
 const LangToggle: React.FC<PropsType> = () => {
     
-    const { lang, setLang } = useContext(LangContext);
+    const { lang, setLang, t } = useTranslate();
     
     const changeLangHandler = () => {
-        setLang((prevValue: any) => prevValue === "en" ? "ru" : "en");
+        lang === "en" ? setLang("ru") : setLang("en");
     }
 
     return (
         <div className="lang-toggle">
             <button className="lang-btn" onClick={changeLangHandler}>
-                { lang === "en" ? "Change Language" : "Сменить язык" }
-                </button>
+                {t('langtoggle.text')}
+            </button>
             <div className="lang-text">{lang}</div>
         </div>
     )

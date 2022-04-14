@@ -1,5 +1,5 @@
-import React, { useContext, useState } from "react";
-import LangContext from "../../contexts/LangContext";
+import React, { useState } from "react";
+import useTranslate from "../../hooks/useTranslate";
 import FormValuesType from "../../types/FormValuesType";
 import SubmitButton from "../ui/submit-button/SubmitButton";
 import TextField from "../ui/text-field/TextField";
@@ -15,7 +15,7 @@ const Registration: React.FC<PropsType> = () => {
         console.log(values);
     }
 
-    const { lang } = useContext(LangContext);
+    const { t } = useTranslate()
 
     return (
         <div className="registration-container">
@@ -23,17 +23,19 @@ const Registration: React.FC<PropsType> = () => {
                 autofocus={true}
                 type="text"
                 name="email"
-                label={ lang === "en" ? "Enter Email:" : "Введите Email:" }
+                label={t("registration.email")}
                 values={values}
-                setValues={setValues} />
+                setValues={setValues}
+            />
             <TextField
                 type="password"
                 name="password"
-                label={ lang === "en" ? "Enter Password:" : "Введите пароль:" }
+                label={t("registration.password")}
                 values={values}
-                setValues={setValues} />
+                setValues={setValues}
+            />
             <SubmitButton onClick={handleSubmit}>
-            { lang === "en" ? "Meo!" : "Мяу!" }
+                {t("registration.submit")}
             </SubmitButton>
         </div>
     )
