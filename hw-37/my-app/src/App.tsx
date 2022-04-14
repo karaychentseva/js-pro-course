@@ -9,13 +9,11 @@ import Timer from "./components/timer/Timer";
 import Title from "./components/title/Title";
 import SubmitButton from "./components/ui/submit-button/SubmitButton";
 import TextField from "./components/ui/text-field/TextField";
-import LangContext from './contexts/LangContext';
 
 const App = () => {
 
   const [lang, setLang] = useState("en");
     return (
-      <LangContext.Provider value={{lang, setLang}}>
       <div className='my-app'>
         <Header/>
         <div className="app-content">
@@ -38,7 +36,6 @@ const App = () => {
         {/* <PostsWrap /> */}
         </div>
       </div>
-      </LangContext.Provider>
     )
 }
 
