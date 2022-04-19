@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import ClickButton from "./components/click-button/ClickButton";
 import Description from "./components/description/Description";
 import Header from "./components/header/Header";
@@ -15,30 +16,47 @@ const App = () => {
 
   const [lang, setLang] = useState("en");
     return (
-      <div className='my-app'>
-        <Header/>
-        <div className="app-content">
+      <BrowserRouter>
+        <div className='my-app'>
+          <Header/>
+          <div className="app-content">
 
-        <Title />
-        <Description />
-        <Description />
-        {/*
-         <div className="button-wrap">
-          <MyButton text='Main Button' colorClass='red' />
-          <MyButton text="Main Button2" />
-          <MyButton colorClass='blue' />
+            <Title />
+            {/*
+            <div className="button-wrap">
+              <MyButton text='Main Button' colorClass='red' />
+              <MyButton text="Main Button2" />
+              <MyButton colorClass='blue' />
+            </div>
+            */}
+            
+            {/* <Registration /> */}
+
+            {/* <ClickButton /> */}
+            {/* <Timer /> */}
+            {/* <PostsWrap /> */}
+
+            {/* <Post id={12} /> */}
+
+            <Routes>
+              <Route path="/registration/*" element={<Registration/>} />
+              <Route path="/home" element={
+                <div>
+                  <Description />
+                  <Description />
+                </div>
+              }>
+                
+              </Route>
+              <Route path="/posts" >
+                <Route index element={<PostsWrap/>} />
+                <Route path=":id" element={<Post/>} />
+              </Route>
+              <Route path="*" element={<Navigate to={"/home"}/>} />
+            </Routes>
+          </div>
         </div>
-         */}
-        
-        {/* <Registration /> */}
-
-        {/* <ClickButton /> */}
-        {/* <Timer /> */}
-        {/* <PostsWrap /> */}
-
-        <Post id={12} />
-        </div>
-      </div>
+      </BrowserRouter>
     )
 }
 

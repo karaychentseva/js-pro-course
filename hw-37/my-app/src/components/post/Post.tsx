@@ -1,18 +1,19 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 import PostType from '../../types/PostType';
 import PostPreview from '../post-preview/PostPreview';
 
 type PropsType = {
-    id: number
 }
 
 const URL = "https://studapi.teachmeskills.by/blog/posts/";
 
-const Post: React.FC<PropsType> = ({ id }) => {
+const Post: React.FC<PropsType> = () => {
     const [post, setPost] = useState<PostType>();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
+    const { id } = useParams();
     useEffect(() => {
         fetchData();
     }, []);

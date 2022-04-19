@@ -14,12 +14,8 @@ const PostsWrap: React.FC<PropsType> = () => {
     const [error, setError] = useState(false);
 
     useEffect(() => {
-        console.log(posts);
-    }, [posts]);
-
-    useEffect(() => {
         setLoading(true);
-        setTimeout(fetchData, 2000);        
+        setTimeout(fetchData, 500);        
     }, []);
 
     const fetchData = () => {

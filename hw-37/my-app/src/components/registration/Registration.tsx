@@ -20,7 +20,7 @@ const Registration: React.FC<PropsType> = () => {
     return (
         <div className="registration-container">
             <TextField
-                autofocus={true}
+                autofocus
                 type="text"
                 name="email"
                 label={t("registration.email")}
