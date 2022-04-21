@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
-import PostType from '../../types/PostType';
+import { useParams } from 'react-router-dom';
+import usePost from '../../hooks/usePost';
 import PostPreview from '../post-preview/PostPreview';
 
 type PropsType = {
@@ -9,33 +8,9 @@ type PropsType = {
 const URL = "https://studapi.teachmeskills.by/blog/posts/";
 
 const Post: React.FC<PropsType> = () => {
-    const [post, setPost] = useState<PostType>();
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
-
     const { id } = useParams();
-    useEffect(() => {
-        fetchData();
-    }, []);
-
-    const fetchData = () => {
-        setLoading(true);
-        setTimeout(() => {
-            fetch(`${URL}${id}`)
-                .then((response) => response.json())
-                .then((data) => {
-                    const post = data as PostType;
-                    setPost(post);
-                })
-                .catch(() => {
-                    setError(true);
-                })
-                .finally(() => {
-                    setLoading(false);
-                })
-        }, 0);
-    }
-
+    const { data, loading, error } = usePost(id);
+    
     if (loading) {
         return (
             <div>
@@ -48,9 +23,9 @@ const Post: React.FC<PropsType> = () => {
                 Error...
             </div>
         )
-    } else if (post) {
+    } else if (data) {
         return (
-            <PostPreview data={post} />
+            <PostPreview data={data} />
         )
     }
 
