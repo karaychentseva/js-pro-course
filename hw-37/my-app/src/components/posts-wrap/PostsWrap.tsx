@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
+import usePosts from "../../hooks/usePosts";
+import PostsFilterType from "../../types/PostsFilterType";
 import PostType from "../../types/PostType";
 import PostPreview from "../post-preview/PostPreview";
+import PostsFilter from "../posts-filter/PostsFilter";
 import "./PostsWrap.scss";
 
 const URL = "https://studapi.teachmeskills.by/blog/posts/?limit=50&offset=0";
@@ -9,37 +12,24 @@ type PropsType = {}
 
 const PostsWrap: React.FC<PropsType> = () => {
 
-    const [posts, setPosts] = useState<PostType[]>([]);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
+    const [filter, setFilter] = useState<PostsFilterType>({
+        page: 1,
+        limit: 4,
+    });
+    const { data, loading, error } = usePosts(filter);
 
-    useEffect(() => {
-        setLoading(true);
-        setTimeout(fetchData, 500);        
-    }, []);
-
-    const fetchData = () => {
-        fetch(URL)
-            .then((response) => response.json())
-            .then((data) => {
-                const posts = data.results as PostType[];
-                setPosts(posts);
-            })
-            .catch(() => {
-                setError(true);
-            })
-            .finally(() => {
-                setLoading(false);
-            })
-    }
-
-    const postComponents = posts.map(post => <PostPreview key={post.id} data={post} />);
+    const postComponents = data.results
+        .map(post => <PostPreview key={post.id} data={post} />);
 
     return (
-        <div className="posts-wrap">
-            { postComponents }
-            { loading && "Loading..." }
-            { error && "Error :(" }
+        <div>
+            <PostsFilter count={data.count} filter={filter} setFilter={setFilter} />
+            <div className="posts-wrap">
+                
+                { postComponents }
+                { loading && "Loading..." }
+                { error && "Error :(" }
+            </div>
         </div>
     )
 }

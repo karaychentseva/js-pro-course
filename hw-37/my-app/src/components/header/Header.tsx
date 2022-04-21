@@ -1,30 +1,32 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import LangToggle from "../lang-toggle/LangToggle";
 import "./Header.scss";
 
 type PropsType = {
     
 }
+
+const LINKS = [
+    { url: "/registration", text: "Register" },
+    { url: "/posts", text: "Posts" },
+]
+
 const Header: React.FC<PropsType> = () => {
     
     return (
         <div className="header">
-            <NavLink to="/home">
+            <Link to="/home">
                 <h3>Cat Blog</h3>
-            </NavLink>
-            {/*  */}
-            <NavLink
-                to="/registration"
-                className={({ isActive }) => isActive ? "_active" : ""}
-            >
-                Register
-            </NavLink>
-            <NavLink
-                to="/posts"
-                className={({ isActive }) => isActive ? "_active" : ""}
-            >
-                Posts
-            </NavLink>
+            </Link>
+            {LINKS.map(({ url, text }) => 
+                    <NavLink
+                        key={url}
+                        to={url}
+                        className={({ isActive }) => isActive ? "_active" : ""}
+                    >
+                        {text}
+                    </NavLink>
+            )}
             <LangToggle/>
         </div>
     )
