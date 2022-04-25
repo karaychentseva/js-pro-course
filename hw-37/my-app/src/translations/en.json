@@ -3,5 +3,13 @@
     "registration.password": "Enter Password:",
     "registration.submit": "Meo!",
     "langtoggle.text": "Change Language",
-    "title.text": "Make your blog"
+    "title.text": "Make your blog",
+    "filter.paging.label": "Posts per page",
+    "filter.author.label": "Author",
+    "filter.lesson.label": "Lesson",
+    "filter.ordering.label": "Ordering",
+    "filter.ordering.id.asc": "Id ASC",
+    "filter.ordering.id.desc": "Id DESC",
+    "filter.ordering.date.asc": "Date ASC",
+    "filter.ordering.date.desc": "Date DESC"
 }
