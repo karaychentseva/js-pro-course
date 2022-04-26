@@ -3,5 +3,13 @@
     "registration.password": "Введите пароль:",
     "langtoggle.text": "Сменить язык",
     "registration.submit": "Мяу!",
-    "title.text": "Создай свой блог"
+    "title.text": "Создай свой блог",
+    "filter.paging.label": "Постов на странице",
+    "filter.author.label": "Автор",
+    "filter.lesson.label": "Урок",
+    "filter.ordering.label": "Сортировка",
+    "filter.ordering.id.asc": "Id - по возрастанию",
+    "filter.ordering.id.desc": "Id - по убыванию",
+    "filter.ordering.date.asc": "Дата - по возрастанию",
+    "filter.ordering.date.desc": "Дата - по убыванию"
 }
