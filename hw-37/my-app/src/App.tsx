@@ -39,6 +39,13 @@ const App = () => {
             {/* <Post id={12} /> */}
 
             <Routes>
+            <Route path="/clicker/" element= {
+                <div>
+                  <ClickButton/>
+                  <ClickButton/>
+                  <ClickButton/>
+                </div>
+              } />
               <Route path="/registration/*" element={<Registration/>} />
               <Route path="/home" element={
                 <div>

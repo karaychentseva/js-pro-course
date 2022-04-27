@@ -9,6 +9,7 @@ type PropsType = {
 const LINKS = [
     { url: "/registration", text: "Register" },
     { url: "/posts", text: "Posts" },
+    { url: "/clicker", text: "Clicker" },
 ]
 
 const Header: React.FC<PropsType> = () => {
