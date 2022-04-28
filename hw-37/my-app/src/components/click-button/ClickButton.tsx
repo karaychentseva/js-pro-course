@@ -1,29 +1,35 @@
-import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setValue, shiftValue } from "../../store/clicker/actionCreators";
 
+import "./ClickButton.scss";
 type PropsType = {}
 
 const ClickButton = ({}: PropsType) => {
-    const [count, setCount] = useState(10);
-
-    useEffect(() => {
-        console.log('component render, counter: ' + count);
-    }, [count]);
+    const count = useSelector((state: any) => state.clicker.value);
+    const dispatch = useDispatch();
 
     const increment = () => {
-        setCount(count + 1);
+        dispatch(shiftValue(1));
     }
     const decrement = () => {
-        setCount(count - 1);
+        dispatch(shiftValue(-1));
+    }
+    
+    const reset = () => {
+        dispatch(setValue(0));
     }
 
     return (
-        <div>
-            <p style={{ background: count % 2 ? "red" : "green" }}>Вы кликнули {count} раз(а)</p>
-            <button onClick={increment}>
-            Нажми на меня - увеличить
-            </button>
+        <div className="click-button-component">
+            <p>Вы кликнули {count} раз(а)</p>
             <button onClick={decrement}>
-            Нажми на меня - уменьшить
+                -1
+            </button>
+            <button onClick={increment}>
+                +1
+            </button>
+            <button onClick={reset}>
+                reset
             </button>
         </div>
     )
