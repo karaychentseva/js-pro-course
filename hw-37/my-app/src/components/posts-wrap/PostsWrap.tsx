@@ -1,5 +1,5 @@
 import usePosts from "../../hooks/usePosts";
-import React, {useReducer } from 'react';
+import React, { useReducer } from 'react';
 import PostPreview from "../post-preview/PostPreview";
 import PostsFilter from "../posts-filter/PostsFilter";
 import "./PostsWrap.scss";
