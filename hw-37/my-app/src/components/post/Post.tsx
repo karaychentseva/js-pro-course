@@ -2,7 +2,6 @@ import { useParams } from 'react-router-dom';
 import React, { useEffect } from 'react';
 import { useActions } from '../../hooks/useActions';
 import { useSelector } from '../../hooks/useSelector';
-import usePost from '../../hooks/usePost';
 import PostPreview from '../post-preview/PostPreview';
 
 type PropsType = {

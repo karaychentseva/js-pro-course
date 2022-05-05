@@ -1,7 +1,13 @@
 import { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import PostType from "../../types/PostType";
+import { ReactComponent as LikeIcon } from "../../assets/heart-solid.svg";
+import { ReactComponent as DislikeIcon } from "../../assets/heart-broken-solid.svg";
+import { useActions } from '../../hooks/useActions';
+import { useSelector } from '../../hooks/useSelector';
 import "./PostPreview.scss";
+import { PostGrade } from "../../enums/PostGrade";
+
 
 type PropsType = {
     data: PostType
@@ -11,7 +17,10 @@ type PropsType = {
 const PostPreview: React.FC<PropsType> = ({data}) => {
     const navigate = useNavigate();
     const [isError, setIsError] = useState(false);
-
+    const { likePost, dislikePost } = useActions();
+    const grades = useSelector(state => state.posts.grades);
+    const isLiked = grades[data.id] === PostGrade.LIKE;
+    const isDisliked = grades[data.id] === PostGrade.DISLIKE;
     const handleImgError = () => {
         console.log('error on image loading');
         setIsError(true);
@@ -35,6 +44,9 @@ const PostPreview: React.FC<PropsType> = ({data}) => {
         });
     }
 
+    const handleClickLike = () => likePost(data.id);
+    const handleClickDislike = () => dislikePost(data.id);
+
     return (
         <div className="post">
             <div className="post__img" onClick={handleClick}>
@@ -46,6 +58,14 @@ const PostPreview: React.FC<PropsType> = ({data}) => {
             
             <p className="post__text">{data.text}</p>
             <span className="post__date">{data.date}</span>
+            <div className="post__rating">
+                <span className="post__rating_icon" onClick={handleClickLike}>
+                    <LikeIcon className={`icon ${isLiked ? "_liked" : ""}`} />
+                </span>
+                <span className="post__rating_icon" onClick={handleClickDislike}>
+                    <DislikeIcon className={`icon ${isDisliked ? "_disliked" : ""}`} />
+                </span>
+            </div>
         </div>
     )
 }
