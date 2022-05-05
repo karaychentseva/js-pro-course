@@ -41,7 +41,31 @@
     &__date {
         font-size: 14px;
         color: blue;
-        
+    }
 
+    &__rating {
+        display: flex;
+        justify-content: center;
+        
+        .icon {
+            width: 20px;
+            height: 20px;
+            margin: 3px 5px;
+            path {
+                fill: rgb(197, 197, 197);
+            }
+            
+            &._liked {
+                path {
+                    fill: var(--primary-color0);
+                }
+            }
+    
+            &._disliked {
+                path {
+                    fill: var(--primary-color0);
+                }
+            }
+        }
     }
 }

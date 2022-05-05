@@ -1,10 +1,31 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { PostGrade } from "../../enums/PostGrade";
 import PostType from "../../types/PostType"
 import { fetchPosts } from "./postsThunks";
+
+const getGradesFromStorage = (): GradesType => {
+    try {
+        return JSON.parse(localStorage.getItem("grades") || "") as GradesType;
+    } catch {
+        return {};
+    }
+}
+
+const setGradesToStorage = (data: GradesType) => {
+    try {
+        localStorage.setItem("grades", JSON.stringify(data));
+    } catch {}
+}
+
+
+type GradesType = {
+    [prop: number]: PostGrade
+}
 
 type StoreType = {
     data: PostType[],
     count: number,
+    grades: GradesType,
     loading: boolean,
     error?: string,
 }
@@ -13,12 +34,32 @@ const initialState: StoreType = {
     data: [],
     count: 0,
     loading: false,
+    grades: getGradesFromStorage(),
 }
 
 const postsSlice = createSlice({
     name: "posts",
     initialState,
-    reducers: {},
+    reducers: {
+        likePost: (state, { payload }: PayloadAction<number>) => {
+            if (state.grades[payload] === PostGrade.LIKE) {
+                delete state.grades[payload];
+            } else {
+                state.grades[payload] = PostGrade.LIKE;
+            }
+
+            setGradesToStorage(state.grades);
+        },
+        dislikePost: (state, { payload }: PayloadAction<number>) => {
+            if (state.grades[payload] === PostGrade.DISLIKE) {
+                delete state.grades[payload];
+            } else {
+                state.grades[payload] = PostGrade.DISLIKE;
+            }
+
+            setGradesToStorage(state.grades);
+        },
+    },
     extraReducers: builder => {
         builder.addCase(fetchPosts.pending, (state) => {
             state.loading = true;
