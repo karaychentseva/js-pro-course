@@ -46,7 +46,7 @@
     &__rating {
         display: flex;
         justify-content: center;
-        
+
         .icon {
             width: 20px;
             height: 20px;
@@ -54,20 +54,8 @@
             path {
                 fill: rgb(197, 197, 197);
             }
-            
-            &._liked {
-                path {
-                    fill: var(--primary-color0);
-                }
-            }
-    
-            &._disliked {
-                path {
-                    fill: var(--primary-color0);
-                }
-            }
 
-            &._bookmarked {
+            &._liked, &._disliked, &._bookmarked {
                 path {
                     fill: var(--primary-color0);
                 }

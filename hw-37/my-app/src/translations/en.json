@@ -7,6 +7,7 @@
     "filter.paging.label": "Posts per page",
     "filter.author.label": "Author",
     "filter.lesson.label": "Lesson",
+    "filter.lesson.title": "Title",
     "filter.ordering.label": "Ordering",
     "filter.ordering.id.asc": "Id ASC",
     "filter.ordering.id.desc": "Id DESC",
