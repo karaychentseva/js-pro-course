@@ -1,22 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { PostGrade } from "../../enums/PostGrade";
+import Storage from "../../helpers/Storage";
 import PostType from "../../types/PostType"
 import { fetchPosts } from "./postsThunks";
-
-const getGradesFromStorage = (): GradesType => {
-    try {
-        return JSON.parse(localStorage.getItem("grades") || "") as GradesType;
-    } catch {
-        return {};
-    }
-}
-
-const setGradesToStorage = (data: GradesType) => {
-    try {
-        localStorage.setItem("grades", JSON.stringify(data));
-    } catch {}
-}
-
 
 type GradesType = {
     [prop: number]: PostGrade
@@ -26,6 +12,7 @@ type StoreType = {
     data: PostType[],
     count: number,
     grades: GradesType,
+    bookmarks: number[],
     loading: boolean,
     error?: string,
 }
@@ -34,30 +21,40 @@ const initialState: StoreType = {
     data: [],
     count: 0,
     loading: false,
-    grades: getGradesFromStorage(),
+    grades: Storage.get("grades", {}),
+    bookmarks: Storage.get("bookmarks", []),
 }
 
 const postsSlice = createSlice({
     name: "posts",
     initialState,
     reducers: {
-        likePost: (state, { payload }: PayloadAction<number>) => {
-            if (state.grades[payload] === PostGrade.LIKE) {
-                delete state.grades[payload];
+        likePost: (state, { payload: postId }: PayloadAction<number>) => {
+            if (state.grades[postId] === PostGrade.LIKE) {
+                delete state.grades[postId];
             } else {
-                state.grades[payload] = PostGrade.LIKE;
+                state.grades[postId] = PostGrade.LIKE;
             }
 
-            setGradesToStorage(state.grades);
+            Storage.set("grades", state.grades);
         },
-        dislikePost: (state, { payload }: PayloadAction<number>) => {
-            if (state.grades[payload] === PostGrade.DISLIKE) {
-                delete state.grades[payload];
+        dislikePost: (state, { payload: postId }: PayloadAction<number>) => {
+            if (state.grades[postId] === PostGrade.DISLIKE) {
+                delete state.grades[postId];
             } else {
-                state.grades[payload] = PostGrade.DISLIKE;
+                state.grades[postId] = PostGrade.DISLIKE;
             }
 
-            setGradesToStorage(state.grades);
+            Storage.set("grades", state.grades);
+        },
+        bookmarkPost: (state, { payload: postId }: PayloadAction<number>) => {
+            if (state.bookmarks.includes(postId)) {
+                state.bookmarks = state.bookmarks.filter(id => id !== postId);
+            } else {
+                state.bookmarks.push(postId);
+            }
+
+            Storage.set("bookmarks", state.bookmarks);
         },
     },
     extraReducers: builder => {
