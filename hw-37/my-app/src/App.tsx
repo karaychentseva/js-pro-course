@@ -11,6 +11,7 @@ import Timer from "./components/timer/Timer";
 import Title from "./components/title/Title";
 import SubmitButton from "./components/ui/submit-button/SubmitButton";
 import TextField from "./components/ui/text-field/TextField";
+import PostsWrapFront from "./components/posts-wrap-front/PostsWrapFront";
 
 const App = () => {
 
@@ -57,6 +58,10 @@ const App = () => {
               </Route>
               <Route path="/posts" >
                 <Route index element={<PostsWrap/>} />
+                <Route path=":id" element={<Post/>} />
+              </Route>
+              <Route path="/posts-front" >
+                <Route index element={<PostsWrapFront/>} />
                 <Route path=":id" element={<Post/>} />
               </Route>
               <Route path="*" element={<Navigate to={"/home"}/>} />

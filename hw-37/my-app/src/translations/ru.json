@@ -7,6 +7,7 @@
     "filter.paging.label": "Постов на странице",
     "filter.author.label": "Автор",
     "filter.lesson.label": "Урок",
+    "filter.lesson.title": "Заголовок",
     "filter.ordering.label": "Сортировка",
     "filter.ordering.id.asc": "Id - по возрастанию",
     "filter.ordering.id.desc": "Id - по убыванию",

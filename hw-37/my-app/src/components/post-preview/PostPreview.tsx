@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import PostType from "../../types/PostType";
 import { ReactComponent as LikeIcon } from "../../assets/heart-solid.svg";
 import { ReactComponent as DislikeIcon } from "../../assets/heart-broken-solid.svg";
+import { ReactComponent as BookmarkIcon } from "../../assets/bookmark-solid.svg";
 import { useActions } from '../../hooks/useActions';
 import { useSelector } from '../../hooks/useSelector';
 import "./PostPreview.scss";
@@ -17,10 +18,14 @@ type PropsType = {
 const PostPreview: React.FC<PropsType> = ({data}) => {
     const navigate = useNavigate();
     const [isError, setIsError] = useState(false);
-    const { likePost, dislikePost } = useActions();
+    const { likePost, dislikePost, bookmarkPost } = useActions();
     const grades = useSelector(state => state.posts.grades);
     const isLiked = grades[data.id] === PostGrade.LIKE;
     const isDisliked = grades[data.id] === PostGrade.DISLIKE;
+
+    const marks = useSelector(state => state.posts.bookmarks);
+    const isBookmarked = marks.includes(data.id);
+
     const handleImgError = () => {
         console.log('error on image loading');
         setIsError(true);
@@ -46,6 +51,7 @@ const PostPreview: React.FC<PropsType> = ({data}) => {
 
     const handleClickLike = () => likePost(data.id);
     const handleClickDislike = () => dislikePost(data.id);
+    const handleClickMark = () => bookmarkPost(data.id);
 
     return (
         <div className="post">
@@ -64,6 +70,9 @@ const PostPreview: React.FC<PropsType> = ({data}) => {
                 </span>
                 <span className="post__rating_icon" onClick={handleClickDislike}>
                     <DislikeIcon className={`icon ${isDisliked ? "_disliked" : ""}`} />
+                </span>
+                <span onClick={handleClickMark}>
+                    <BookmarkIcon className={`icon ${isBookmarked ? "_bookmarked" : ""}`}/>
                 </span>
             </div>
         </div>
