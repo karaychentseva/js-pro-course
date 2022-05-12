@@ -7,7 +7,7 @@ type PropsType = {
 }
 
 const LINKS = [
-    { url: "/registration", text: "Register" },
+    { url: "/login", text: "Login" },
     { url: "/posts", text: "Posts" },
     { url: "/posts-front", text: "Posts (Front)" },
     { url: "/clicker", text: "Clicker" },

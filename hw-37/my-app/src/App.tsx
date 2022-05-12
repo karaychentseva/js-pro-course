@@ -12,6 +12,7 @@ import Title from "./components/title/Title";
 import SubmitButton from "./components/ui/submit-button/SubmitButton";
 import TextField from "./components/ui/text-field/TextField";
 import PostsWrapFront from "./components/posts-wrap-front/PostsWrapFront";
+import Login from "./components/login/Login";
 
 const App = () => {
 
@@ -47,7 +48,7 @@ const App = () => {
                   <ClickButton/>
                 </div>
               } />
-              <Route path="/registration/*" element={<Registration/>} />
+              <Route path="/login/*" element={<Login/>} />
               <Route path="/home" element={
                 <div>
                   <Description />
