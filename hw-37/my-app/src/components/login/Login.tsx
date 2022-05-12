@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { getEmailError, getPasswordError } from "../../helpers/validation";
 import { CircularProgress } from '@mui/material';
 import useTranslate from "../../hooks/useTranslate";
 import { useActions } from "../../hooks/useActions";
@@ -12,20 +13,30 @@ type PropsType = {
 }
 const Login: React.FC<PropsType> = () => {
     
-    const [values, setValues] = useState<FormValuesType>({});
+    const [values, _setValues] = useState<FormValuesType>({});
 
+    const [validationsError, setValidationsError] = useState("");
     const { t } = useTranslate()
-    const { createTokens } = useActions();
+    const { createTokens, setAuthError } = useActions();
     const loading = useSelector(state => state.auth.loading);
-    const error = useSelector(state => state.auth.error);
+    const serverError = useSelector(state => state.auth.error);
+    const error: string = validationsError || (serverError ? "No active account found with the given credentials" : "");
 
     const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
 
-        createTokens(values);
+        const validationError = getEmailError(values.email) || getPasswordError(values.password);
+        if (validationError) {
+            setValidationsError(validationError);
+        } else {
+            createTokens(values);
+        }
     }
-
-
+    const setValues = (callback: (prevValue: FormValuesType) => FormValuesType) => {
+        _setValues(callback)
+        setValidationsError("");
+        setAuthError(false);
+    }
     return (
         <div className="login-container" >
             {loading &&
@@ -35,7 +46,7 @@ const Login: React.FC<PropsType> = () => {
             }
             {error &&
                 <div className="form-error">
-                    No active account found with the given credentials
+                    {error}
                 </div>
             }
 
