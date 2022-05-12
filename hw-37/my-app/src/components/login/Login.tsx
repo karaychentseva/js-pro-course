@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { CircularProgress } from '@mui/material';
 import useTranslate from "../../hooks/useTranslate";
 import { useActions } from "../../hooks/useActions";
 import { useSelector } from "../../hooks/useSelector";
@@ -29,7 +30,7 @@ const Login: React.FC<PropsType> = () => {
         <div className="login-container" >
             {loading &&
                 <div className="form-loading">
-                    Loading...
+                    <CircularProgress/>
                 </div>
             }
             {error &&
