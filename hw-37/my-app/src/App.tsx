@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { useSelector } from './hooks/useSelector';
 import ClickButton from "./components/click-button/ClickButton";
 import Description from "./components/description/Description";
 import Header from "./components/header/Header";
@@ -17,6 +18,7 @@ import Login from "./components/login/Login";
 const App = () => {
 
   const [lang, setLang] = useState("en");
+  const logged = useSelector(state => state.auth.logged);
     return (
       <BrowserRouter>
         <div className='my-app'>
@@ -48,7 +50,12 @@ const App = () => {
                   <ClickButton/>
                 </div>
               } />
-              <Route path="/login/*" element={<Login/>} />
+
+              {!logged &&
+                  <>
+                    <Route path="/login/*" element={<Login/>} />
+                  </>
+              }
               <Route path="/home" element={
                 <div>
                   <Description />
