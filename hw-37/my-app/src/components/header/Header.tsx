@@ -18,7 +18,6 @@ const LINKS = [
     { url: "/posts", text: "Posts" },
     { url: "/posts-front", text: "Posts (Front)" },
     { url: "/clicker", text: "Clicker" },
-    { url: "/my-posts", text: "My Posts" },
 ]
 
 const Header: React.FC<PropsType> = () => {
@@ -45,6 +44,15 @@ const Header: React.FC<PropsType> = () => {
                         {text}
                     </NavLink>
             )}
+            {logged &&
+                <NavLink
+                    key="/my-posts"
+                    to="/my-posts"
+                    className={({ isActive }) => isActive ? "_active" : ""}
+                >
+                    My Posts
+                </NavLink>
+            }
             <LangToggle/>
             {logged ?
                 <>
