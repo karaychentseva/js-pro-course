@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { useSelector } from './hooks/useSelector';
 import ClickButton from "./components/click-button/ClickButton";
 import Description from "./components/description/Description";
 import Header from "./components/header/Header";
@@ -12,10 +13,13 @@ import Title from "./components/title/Title";
 import SubmitButton from "./components/ui/submit-button/SubmitButton";
 import TextField from "./components/ui/text-field/TextField";
 import PostsWrapFront from "./components/posts-wrap-front/PostsWrapFront";
+import Login from "./components/login/Login";
+import MyPosts from "./components/my-posts/MyPosts";
 
 const App = () => {
 
   const [lang, setLang] = useState("en");
+  const logged = useSelector(state => state.auth.logged);
     return (
       <BrowserRouter>
         <div className='my-app'>
@@ -47,7 +51,12 @@ const App = () => {
                   <ClickButton/>
                 </div>
               } />
-              <Route path="/registration/*" element={<Registration/>} />
+
+              {!logged &&
+                  <>
+                    <Route path="/login/*" element={<Login/>} />
+                  </>
+              }
               <Route path="/home" element={
                 <div>
                   <Description />
@@ -64,6 +73,9 @@ const App = () => {
                 <Route index element={<PostsWrapFront/>} />
                 <Route path=":id" element={<Post/>} />
               </Route>
+              {logged &&
+                  <Route path="/my-posts" element={<MyPosts/>} />
+              }
               <Route path="*" element={<Navigate to={"/home"}/>} />
             </Routes>
           </div>
